@@ -1,0 +1,31 @@
+  .flex-container {
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    top: 40%;
+    right: 10px;
+    translate: (-50%, -10px);
+  }
+
+  .main-color-caption {
+    color: #bb5296
+  }
+
+  .font-secondary-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+  }
+
+  .flex-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 0.7em;
+  }
+
+  .gallery-order {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 1em;
+    justify-items: center;
+  }
