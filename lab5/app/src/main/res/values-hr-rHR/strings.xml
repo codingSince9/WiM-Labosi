@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">lab5</string>
+    <string name="flowers">CVIJEĆE</string>
+    <string name="seed">SJEMENKE</string>
+    <string name="pots">LONCI</string>
+    <string name="tools">ALATI</string>
+    <string name="soil">ZEMLJA</string>
+    <string name="fertilizers">GNOJIVA</string>
+    <string name="birdFeeders">KUĆICE ZA PTICE</string>
+    <string name="gardenGnomes">VRTNI PATULJCI</string>
+<!--    <string name="tulip">Tulipan</string>-->
+<!--    <string name="lavander">Lavanda</string>-->
+<!--    <string name="fucsia">Fuksija</string>-->
+<!--    <string name="daisy">Tratinčica</string>-->
+<!--    <string name="shovel">Lopata</string>-->
+<!--    <string name="smallShovel">Mala lopata</string>-->
+<!--    <string name="rake">Grablje</string>-->
+<!--    <string name="tulip1kg">Tulipan (1kg)</string>-->
+    <string name="noItems">U ovoj kategoriji nema proizvoda</string>
+    <string name="itemAdded">Proizvod je dodan u košaricu</string>
+    <string name="wantToAddItem">Želite li dodati proizvod u košaricu ?</string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="price">Cijena:</string>
+    <string name="sendmsg">Pošalji poruku</string>
+    <string name="callnum">Nazovi broj</string>
+    <string name="callormsg">Nazovi ili pošalji poruku na broj</string>
+    <string name="productcat">KATEGORIJE PROIZVODA</string>
+    <string name="info">INFORMACIJE</string>
+    <string name="flowerpower">Snaga Cvijeća</string>
+</resources>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">lab5</string>
+    <string name="title_activity_category_list" translatable="false">ScrollingActivity</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="flowers">FLOWERS</string>
+    <string name="seed">SEED</string>
+    <string name="pots">POTS</string>
+    <string name="tools">TOOLS</string>
+    <string name="soil">SOIL</string>
+    <string name="fertilizers">FERTILIZERS</string>
+    <string name="birdFeeders">BIRD FEEDERS</string>
+    <string name="gardenGnomes">GARDEN GNOMES</string>
+    <!--    <string name="tulip">Tulip</string>-->
+    <!--    <string name="lavander">Lavander</string>-->
+    <!--    <string name="fucsia">Fucsia</string>-->
+    <!--    <string name="daisy">Daisy</string>-->
+    <!--    <string name="shovel">Shovel</string>-->
+    <!--    <string name="smallShovel">Small Shovel</string>-->
+    <!--    <string name="rake">Rake</string>-->
+    <!--    <string name="tulip1kg">Tulip (1kg)</string>-->
+    <string name="noItems">No items in this category</string>
+    <string name="itemAdded">Item added to cart</string>
+    <string name="wantToAddItem">Do you want to add this item to cart ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="price">Price:</string>
+    <string name="sendmsg">Send message</string>
+    <string name="callnum">Call number</string>
+    <string name="callormsg">Call or message number</string>
+    <string name="productcat">PRODUCT CATEGORIES</string>
+    <string name="info">INFO</string>
+    <string name="flowerpower">Flower Power</string>
+</resources>
