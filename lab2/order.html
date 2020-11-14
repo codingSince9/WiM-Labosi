@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flower power!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/flower-icon.png" />
+    <link rel="stylesheet" type="text/css" href="vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/order.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+
+<body class="content body-header-fixed">
+    <header class="header header-fixed primary-color-bg">
+        <nav class="navigation container">
+            <div class="menu">
+                <a href="index.html" class="link menu-item">Home</a>
+                <a href="order.html" class="link link-active menu-item">Order</a>
+                <a href="index.html" class="link">
+                    <img class="scaled-image scaled-image-fixed" src="images/logo.svg" alt="Company logo">
+                </a>
+                <a href="#" class="link menu-item">Contact us</a>
+                <a href="cart.html" class="link menu-item cart-menu">
+                    <img src="images/cart-icon.svg" alt="Cart icon">
+                    <div class="cart-menu-status">
+                        <div id="cart-items" onclick="">0</div>
+                        <div>items</div>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main class="main">
+
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="menu menu-distributed">
+                <div class="infobox infobox-marginless infobox-copyright">
+                    <h4 class="infobox-title infobox-title-secondary-color main-color-emphasized">
+                        Copy this as much as you like
+                    </h4>
+                </div>
+                <div class="infobox infobox-marginless infobox-flower">
+                    <h4 class="infobox-title infobox-title-secondary-color main-color-emphasized">
+                        Flower power
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <template id="category-template">
+        <section class="section secondary-color-bg">
+            <div class="centered-container">
+                <h1 class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized">Category name</span>
+                    Inventory</h1>
+                <div class="separator"></div>
+            </div>
+            <div class="gallery"></div>
+        </section>
+    </template>
+    <template id="product-template">
+        <div class="photo-box" data-id="">
+            <img class="photo-box-image" src=""></img>
+            <div class="photo-box-title font-secondary main-color-emphasized">Product name</div>
+            <div class="cart-btn" onclick="">
+            </div>
+        </div>
+    </template>
+    <script>
+        let getData = async function () {
+            let response = await fetch("https://wimlab2.azurewebsites.net/categories");
+            let data = await response.json();
+            if (sessionStorage.getItem("itemsInCart") === null) {
+                sessionStorage.setItem("itemsInCart", 0);
+            }
+            addCategories(data);
+        }
+
+        let addCategories = async function (categories) {
+            let main = document.querySelector('main');
+            let categoryTemplate = document.querySelector('#category-template');
+
+            for (let index = 0; index < categories.length; index++) {
+                let category = categoryTemplate.content.cloneNode(true);
+                let categoryTitleElement = category.querySelector('.decorated-title > span');
+                categoryTitleElement.textContent = categories[index].name;
+
+                // INSERT CODE HERE --> PRIPREMA
+
+                let categoryID = categories[index].id;
+                let categoryResponse = await fetch("https://wimlab2.azurewebsites.net/products?categoryId=" +
+                    categoryID);
+                let categoryResponseJSON = await categoryResponse.json();
+
+                let productTemplate = document.querySelector('#product-template');
+
+                for (let i = 0; i < categoryResponseJSON.length; i++) {
+                    let gallery = category.querySelector(".gallery");
+
+                    let product = productTemplate.content.cloneNode(true);
+                    let productTitle = product.querySelector('.photo-box-title');
+                    productTitle.textContent = categoryResponseJSON[i].name;
+                    let productImage = product.querySelector('.photo-box-image');
+                    productImage.src = categoryResponseJSON[i].imageUrl;
+
+                    let cartBtn = product.querySelector('.cart-btn');
+                    cartBtn.onclick = function () {
+                        labela = document.getElementById('cart-items');
+                        console.log(labela);
+                        let productName = categoryResponseJSON[i].name;
+
+                        //postavljanje cart num ako je prvi put kliknuto
+                        if (sessionStorage.getItem(productName) === null) {
+                            sessionStorage.setItem(productName, 1);
+                            sessionStorage.setItem("itemsInCart", parseInt(sessionStorage.getItem(
+                                "itemsInCart")) + 1);
+                            sessionStorage.numOfClicks = sessionStorage.getItem("itemsInCart");
+                        } else {
+                            sessionStorage.setItem(productName, parseInt(sessionStorage.getItem(
+                                productName)) + 1);
+                        }
+
+                        labela.textContent = sessionStorage.getItem("itemsInCart");
+                        console.log(categoryResponseJSON[i]);
+                        let broj = parseInt(sessionStorage.getItem(categoryResponseJSON[i].id));
+                        if (isNaN(broj)) {
+                            broj = 0;
+                        } else {
+                            broj++;
+                        }
+                        sessionStorage.setItem(categoryResponseJSON[i].id, broj);
+                    }
+                    gallery.appendChild(product);
+                }
+
+                // END INSERT --> PRIPREMA
+
+                main.appendChild(category);
+            }
+        };
+        getData();
+
+        function incrementFunction() {
+
+            if (typeof (Storage) !== "undefined") {
+                if (sessionStorage.numOfClicks) {
+                    sessionStorage.numOfClicks = parseInt(sessionStorage.numOfClicks) + 1;
+                }
+                document.getElementById('cart-items').innerHTML = sessionStorage.numOfClicks;
+            }
+        }
+    </script>
+    <script src="scripts/main.js"></script>
+
+</body>
+
+</html>

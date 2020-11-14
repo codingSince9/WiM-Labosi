@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flower power!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="images/flower-icon.png" />
+    <link rel="stylesheet" type="text/css" href="vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+
+<body class="content body-header-fixed">
+    <header class="header header-fixed primary-color-bg">
+        <nav class="navigation container">
+            <div class="menu">
+                <a href="index.html" class="link menu-item">Home</a>
+                <a href="order.html" class="link menu-item link-active">Order</a>
+                <a href="index.html" class="link">
+                    <img class="scaled-image scaled-image-fixed" src="images/logo.svg" alt="Company logo">
+                </a>
+                <a href="#" class="link menu-item">Contact us</a>
+                <a href="cart.html" class="link menu-item cart-menu">
+                    <img src="images/cart-icon.svg" alt="Cart icon">
+                    <div class="cart-menu-status">
+                        <div id="cart-items">0</div>
+                        <div>items</div>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container centered-container">
+            <h1 class="font-secondary main-color"><span class="main-color-emphasized">Shopping cart</span> items</h1>
+            <div class="separator"></div>
+        </div>
+
+        <div class="cart-header">
+            <div class="cart-header-title"> Product </div>
+            <div class="cart-header-title"> Price </div>
+            <div class="cart-header-title" script="quant()"> Quantity </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="menu menu-distributed">
+                <div class="infobox infobox-marginless infobox-copyright">
+                    <h4 class="infobox-title infobox-title-secondary-color main-color-emphasized">
+                        Copy this as much as you like
+                    </h4>
+                </div>
+                <div class="infobox infobox-marginless infobox-flower">
+                    <h4 class="infobox-title infobox-title-secondary-color main-color-emphasized">
+                        Flower power
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <template id="cart-template-item">
+        <div class="cart-item">
+            <div class="cart-item-title"> Tulips </div>
+            <div class="cart-item-price">15 kn </div>
+            <input type="number" class="cart-item-quantity"></input>
+        </div>
+    </template>
+
+    <template id="cart-total-template">
+        <div class="cart-total">
+            <div>Total: </div>
+            <div id="cart-total-value"></div>
+        </div>
+    </template>
+
+    <script>
+        let getData = async function () {
+            let response = await fetch("https://wimlab2.azurewebsites.net/products");
+            let data = await response.json();
+            addCartItems(data);
+        }
+
+        let addCartItems = async function (cartItems) {
+            let main = document.querySelector('main');
+            let cartItemTemplate = document.querySelector('#cart-template-item');
+            let cartItemTotal = document.querySelector('#cart-total-template');
+            let cartTotal = cartItemTotal.content.cloneNode(true);
+            let cartTotalValue = cartTotal.getElementById('cart-total-value');
+            let broj;
+
+            if (typeof(broj) == "undefined") {
+                console.log("aaa");
+                broj = "0";
+            }
+
+            for (let i = 0; i < cartItems.length; i++) {
+                if (sessionStorage.getItem(cartItems[i].name) !== null) {
+                    let cartItem = cartItemTemplate.content.cloneNode(true);
+                    let cartItemTitle = cartItem.querySelector('.cart-item-title');
+                    let cartItemPrice = cartItem.querySelector('.cart-item-price');
+                    let cartItemQuantity = cartItem.querySelector('.cart-item-quantity');
+
+                    cartItemTitle.textContent = cartItems[i].name;
+                    cartItemPrice.textContent = cartItems[i].price;
+                    cartItemQuantity.value = sessionStorage.getItem(cartItems[i].name);
+
+                    broj = parseInt(broj) + parseInt(cartItemQuantity.value) * parseInt(cartItemPrice.textContent);
+
+                    main.appendChild(cartItem);
+                }
+            }
+            cartTotalValue.textContent = "  " + broj + " " + "kn";
+            main.appendChild(cartTotal);
+        };
+        getData();
+    </script>
+
+    <script src="scripts/main.js"></script>
+
+</body>
+
+</html>
