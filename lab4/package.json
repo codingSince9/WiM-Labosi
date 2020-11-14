@@ -1,0 +1,25 @@
+{
+    "name": "wim-lab-3",
+    "version": "1.0.0",
+    "description": "WiM: Laboratory exercise 3",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
+        "seed": "node db/seed.js"
+    },
+    "keywords": [
+        "express"
+    ],
+    "author": "WiM",
+    "license": "MIT",
+    "dependencies": {
+        "connect-pg-simple": "^6.1.0",
+        "ejs": "^3.1.3",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "express-validator": "^6.5.0",
+        "fs": "0.0.1-security",
+        "pg": "^8.2.1"
+    }
+}
