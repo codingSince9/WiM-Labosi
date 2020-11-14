@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="../images/flower-icon.png"/>
+    <link rel="stylesheet" type="text/css" href="../vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</head>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+    <div class="centered-container">
+        <h1 class="decorated-title font-secondary main-color">Update <span class="main-color-emphasized">
+                            Existing</span> Item</h1>
+        <div class="separator"></div>
+    </div>
+    <section class="section secondary-color-bg">
+        <div class="container">
+			<body>
+                <%- (locals.error) ?  '<h3>Error: ${error}</h3>' : '' %>
+                <form action="/management/updateitem" method="POST">
+                    <fieldset class="fieldset">
+                        <legend"></legend>
+                        <div>
+                            <label class="label-input" for="item">Pick item:</label>
+                            <% locals.selectData = locals.itemsSelect; %>
+                            <%- include('partials/_select'); %>
+                        </div>
+                        <div>
+                            <label class="label-input" for="name">Name:</label>
+                            <input type="text" name="name" id="name" size="20">
+                        </div>
+                        <div>
+                            <label class="label-input" for="price">Price (HRK):</label>
+                            <input type="text" name="price" id="price" size="20">
+                        </div>
+                        <div>
+                            <label class="label-input" for="category">Category:</label>
+                            <% locals.selectData = locals.categoriesSelect; %>
+                            <%- include('partials/_select'); %>
+                        </div>
+                        <div>
+                            <label class="label-input" for="url" url"">Image (URL):</label>
+                            <input type="text" name="url" id="url" size="20">
+                        </div>
+                        <hr>
+                        <div class="submitButtons">
+                            <input class="btn" type="submit" value="Submit">
+                            <input class="btn" type="reset" value="Reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </body>
+        </div>
+    </section>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>
